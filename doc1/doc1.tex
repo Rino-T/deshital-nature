@@ -1,0 +1,87 @@
+\documentclass{jsarticle}
+  \title{通常最小二乗法(Ordinary Least Squares: OLS)}
+  \author{T.Chiba}
+  \usepackage{latexsym}
+  \usepackage[dvipdfmx]{graphicx}
+  \usepackage{array, booktabs}
+  \usepackage{float}
+  \usepackage{moreverb}
+  \usepackage{here}   %図の挿入場所を「ここ」で固定 H
+  \usepackage{fancyvrb}
+  %\usepackage{amsmath, amssymb,theorem}
+  \usepackage{ascmac}
+  \usepackage{geometry}%余白とか縮小するやつ
+  \usepackage{bm}      %ベクトル
+  \usepackage{cancel}  %文字の打ち消し線
+  \usepackage{url}     %URL
+  \usepackage{mathrsfs}%花文字　mathscr{ABCD...}
+  \usepackage{comment} %複数行にわたるコメントアウトの実現 \begin{comment}~\end{commnet}
+  \usepackage{mathtools}
+  \usepackage{newtxtext,newtxmath, theorem} % フォント
+  
+  \geometry{left=30mm,right=30mm,top=25mm,bottom=25mm}
+  
+  \theoremstyle{plain}
+   \newtheorem{theo}{定理}[section]
+   \renewcommand{\thetheo}{}
+   \newtheorem{defi}{定義}[section]
+   \renewcommand{\thedefi}{}
+   \newtheorem{lemm}{補題}[section]
+   \renewcommand{\thelemm}{}
+   \newtheorem{Proof}{証明}[section]
+   \renewcommand{\theProof}{}
+   \newtheorem{exam}{例}[section]
+   \renewcommand{\theexam}{}
+  \def\qed{\hfill $\Box$} %証明終わりの記号
+  
+  % 式番号に節番号を付加 (section.subsection)
+  %\def\theequation{\thesection.\arabic{equation}}
+  %\makeatletter
+  %\@addtoreset{equation}{subsection}
+  %\makeatother
+  
+  % section.subsection.subsection
+  %\makeatletter
+  % \renewcommand{\theequation}{%
+  %   \thesubsection.\arabic{equation}}
+  %  \@addtoreset{equation}{subsection}
+  %\makeatother
+
+  \begin{document}
+  % タイトルの表示
+  \maketitle
+  \begin{abstract}
+    最小二乗法についてみていく。
+  \end{abstract}
+  \section{最小二乗法(1変量)}
+    本題に入る前に、リハビリもかねて1変量の最小二乗法を確認する。
+    線形回帰モデルは下記のような構造をしていると考えられる。
+  \begin{equation}
+    y = \alpha + \beta x + \varepsilon
+  \end{equation}
+    $x, y$ についての観測値 $\{(x_i, y_i) | i = 1,2,\ldots,n\}$ がそれぞれ次のような構造を持っていると仮定する。
+  \begin{equation}
+    y_i = \alpha + \beta x_i + \varepsilon_i, i = 1,\ldots,n
+  \end{equation}
+  誤差 $\varepsilon$ の平方和を考える。
+  \begin{equation}
+    Q(\alpha, \beta) = \sum_{i=1}^n \varepsilon_i^2 = \sum_{i=1}^n \{y_i - (\alpha + \beta x_i)^2 \}
+  \end{equation}
+  これを。偏差平方和と呼ぶ。$Q(\alpha, \beta)$ を最小にするような $\alpha = \hat{\alpha}, \beta = \hat{\beta}$ を最小二乗推定量(Least Squares Estimator: LSE)と呼ぶ。
+
+  \begin{eqnarray}
+    \frac{\partial Q(\alpha, \beta)}{\partial \alpha} &=& 0 \\
+    \frac{\partial Q(\alpha, \beta)}{\partial \beta} &=& 0
+  \end{eqnarray}
+  を満たすような、$\alpha, \beta$ が偏差平方和を最小にする値である。
+  
+  \appendix
+  \section{}
+  \subsection{2変数関数の極値}
+
+  
+  \begin{thebibliography}{9}
+    \bibitem{} 鈴木 武, 山田 作太郎:『数理統計学 -基礎から学ぶデータ解析』, 内田老鶴圃, 1996
+    \bibitem{Inagaki} 稲垣宣生:『数学シリーズ 数理統計学(改訂版)』, 裳華房, 2003.
+  \end{thebibliography}
+\end{document}
