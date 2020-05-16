@@ -51,37 +51,112 @@
   % タイトルの表示
   \maketitle
   \begin{abstract}
-    最小二乗法についてみていく。
+    最小二乗法についてみていく.
   \end{abstract}
   \section{最小二乗法(1変量)}
-    本題に入る前に、リハビリもかねて1変量の最小二乗法を確認する。
-    線形回帰モデルは下記のような構造をしていると考えられる。
+    本題に入る前に,リハビリもかねて1変量の最小二乗法を確認する.
+    線形回帰モデルは下記のような構造をしていると考えられる.
   \begin{equation}
     y = \alpha + \beta x + \varepsilon
   \end{equation}
-    $x, y$ についての観測値 $\{(x_i, y_i) | i = 1,2,\ldots,n\}$ がそれぞれ次のような構造を持っていると仮定する。
+    $x, y$ についての観測値 $\{(x_i, y_i) | i = 1,2,\ldots,n\}$ がそれぞれ次のような構造を持っていると仮定する.
   \begin{equation}
     y_i = \alpha + \beta x_i + \varepsilon_i, i = 1,\ldots,n
   \end{equation}
-  誤差 $\varepsilon$ の平方和を考える。
+  誤差 $\varepsilon$ の平方和を考える.
   \begin{equation}
     Q(\alpha, \beta) = \sum_{i=1}^n \varepsilon_i^2 = \sum_{i=1}^n \{y_i - (\alpha + \beta x_i)^2 \}
   \end{equation}
-  これを。偏差平方和と呼ぶ。$Q(\alpha, \beta)$ を最小にするような $\alpha = \hat{\alpha}, \beta = \hat{\beta}$ を最小二乗推定量(Least Squares Estimator: LSE)と呼ぶ。
+  これを.偏差平方和と呼ぶ.$Q(\alpha, \beta)$ を最小にするような $\alpha = \hat{\alpha}, \beta = \hat{\beta}$ を最小二乗推定量(Least Squares Estimator: LSE)と呼ぶ.
 
-  \begin{eqnarray}
-    \frac{\partial Q(\alpha, \beta)}{\partial \alpha} &=& 0 \\
-    \frac{\partial Q(\alpha, \beta)}{\partial \beta} &=& 0
-  \end{eqnarray}
-  を満たすような、$\alpha, \beta$ が偏差平方和を最小にする値である。
+  \begin{equation}
+    \begin{cases}
+      \frac{\partial Q(\alpha, \beta)}{\partial \alpha} = 0 \\
+      \frac{\partial Q(\alpha, \beta)}{\partial \beta} = 0
+    \end{cases}
+  \end{equation}
+  を満たすような $\alpha, \beta$ が偏差平方和を最小にする値である.
   
   \appendix
   \section{}
   \subsection{2変数関数の極値}
+  偏差平方和を最小にするような, $\alpha$ と $\beta$ を求める際に,$\alpha, \beta$ に関する偏微分を $0$ として,推定量を求めた.しかし,偏微分が $0$ と置くだけでは,
+  $Q(\alpha, \beta)$ の極値が求められるだけで,最小値かどうかは分からない.テキストだと当たり前のように書かれている(きっと頭の良い人にとっては自明なのだろうが)が私には分からないので
+  2変数関数の極値から考え直していく.
 
-  
+  \subsubsection{極大・極小}
+  関数 $f(x, y)$ は連続かつ微分可能とする.
+  \begin{lemm}
+  境界点\footnotemark でない極大点, 極小点においては
+    \begin{equation}
+      \frac{\partial f}{\partial x}(x_0, y_0) = 0, \frac{\partial f}{\partial y}(x_0, y_0) = 0
+    \end{equation}
+  となる.
+  \footnotetext{~\cite{bibun-sekibun} p18 参照.}
+  \end{lemm}
+  \begin{Proof}
+  もし $\frac{\partial f}{\partial x}(x_0, y_0) \neq 0$ ならば、微分可能性の定義\footnotemark
+    \begin{equation*}
+      \begin{cases}
+        f(x, y) - f(x_0, y_0) = \frac{\partial f}{\partial x}(x_0, y_0)(x - x_0) + \frac{\partial f}{\partial y}(x_0, y_0)(y - y_0) + g(x, y), \\
+        \lim_{\bm{x} \to \bm{x}_0} \frac{g(x, y)}{|\bm{x} - \bm{x}_0 |} = 0
+      \end{cases}
+    \end{equation*}
+    において, $y = y_0$ と置くと,
+    \begin{eqnarray*}
+      f(x, y_0) - f(x_0, y_0) &=& \frac{\partial f}{\partial x}(x_0, y_0)(x - x_0) + g(x, y_0) \\
+       &=& \frac{\partial f}{\partial x}(x_0, y_0)(x - x_0)\left\{ 1 + c \cdot \frac{g(x, y_0)}{x - x_0} \right\}
+    \end{eqnarray*}
+    右辺の $\{  \}$ の中は $x$ が $x_0$ に十分近いとき $> 0$ となる. 一方, $x - x_0$ は $x$ が $x_0$ の近傍を動く時必ず符号を変えるため, 
+    $f(x_0, y_0)$ は極大値でも極小値でもないことが分かる. $\frac{\partial f}{\partial y}(x_0, y_0) \neq 0$ としても同様.
+
+    これにより, 連立方程式
+    \begin{equation*}
+      \frac{\partial f}{\partial x}(x_0, y_0) = 0, \frac{\partial f}{\partial y}(x_0, y_0) = 0
+    \end{equation*}
+    を解けば, 境界点でない極値の候補者が全て見つかる. \qed
+  \end{Proof}
+  \footnotetext{
+    $z = f(x, y)$ が点 $\bm{x}_0 = (x_0, y_0)$ で微分可能であるとは, ある定数 $\alpha, \beta$ があって,
+    \begin{equation*}
+      \begin{cases}
+        f(x, y) = f(x_0, y_0) + \alpha(x - x_0) + \beta(y - y_0) + g(x, y) & \\
+        \lim_{\bm{x} \to \bm{x_0}} \frac{g(x, y)}{| \bm{x} - \bm{x}_0 |} & (\bm{x} = (x, y) \neq \bm{x}_0)
+      \end{cases}
+    \end{equation*}
+    と表せること(~\cite{bibun-sekibun} p153 参照)
+  }
+
+  \subsubsection{極大・極小の判定}
+  極大値か極小値かの判定はヘッセ行列により行うことができる.
+
+  \begin{defi}[ヘッセ行列]
+    行列
+    \begin{equation*}
+      \left[
+        \begin{array}{ccc}
+          f_{xx} & f_{xy} \\
+          f_{xy} & f_{yy}
+        \end{array}
+      \right]
+    \end{equation*}
+    を $f(x, y)$ に関するヘッセ行列という.
+  \end{defi}
+
+  \begin{theo}
+    $\frac{\partial f}{\partial x}(x_0, y_0) = \frac{\partial f}{\partial 0}(x_0, y_0) = 0$ を満たす点 $x_0, y_0$ においてヘッセ行列が
+    \begin{description}
+      \item[正定符号] $(x_0, y_0)$ は極小値
+      \item[負定符号] $(x_0, y_0)$ は極大値
+      \item[不定符号] $(x_0, y_0)$ は極値点ではない
+    \end{description}
+  \end{theo}
+
   \begin{thebibliography}{9}
-    \bibitem{} 鈴木 武, 山田 作太郎:『数理統計学 -基礎から学ぶデータ解析』, 内田老鶴圃, 1996
-    \bibitem{Inagaki} 稲垣宣生:『数学シリーズ 数理統計学(改訂版)』, 裳華房, 2003.
+    \bibitem{finance-stats} Tze Leung Lai, Haipeng Xing 著, 松原 望, 山村吉信 訳: 『ファイナンスのための統計学 -統計的アプローチによる評価と意思決定-』, 東京図書, 2016
+    \bibitem{math-data-analysis} 鈴木 武, 山田 作太郎:『数理統計学 -基礎から学ぶデータ解析』, 内田老鶴圃, 1996
+    \bibitem{Inagaki} 稲垣宣生:『数学シリーズ 数理統計学(改訂版)』, 裳華房, 2003
+    \bibitem{daigaku-biseki} 江川博康:『弱点克服 大学生の微積分』東京図書, 2005
+    \bibitem{bibun-sekibun} 笠原晧司: 『サイエンスライブラリー 数学=12 微分積分学』, サイエンス社, 1974
   \end{thebibliography}
 \end{document}
