@@ -70,19 +70,57 @@
   これを.偏差平方和と呼ぶ.$Q(\alpha, \beta)$ を最小にするような $\alpha = \hat{\alpha}, \beta = \hat{\beta}$ を最小二乗推定量(Least Squares Estimator: LSE)と呼ぶ.
 
   \begin{equation}
+  \label{Normal-equation-2-value}
     \begin{cases}
       \frac{\partial Q(\alpha, \beta)}{\partial \alpha} = 0 \\
       \frac{\partial Q(\alpha, \beta)}{\partial \beta} = 0
     \end{cases}
   \end{equation}
-  を満たすような $\alpha, \beta$ が偏差平方和を最小にする値である.
-  
+  を満たすような $\alpha, \beta$ を考える. 2階の偏微分まで計算すると,
+  \begin{eqnarray}
+    \frac{\partial Q}{\partial \alpha} &=& -2 \sum_{i=1}^n (y_i - \alpha - \beta x_i) \\
+    \frac{\partial^2 Q}{\partial \alpha^2} &=& 2n > 0 \\
+    \frac{\partial Q}{\partial \beta} &=& -2\sum_{i=1}^n x_i (y_i - \alpha - \beta x_i) \\
+    \frac{\partial^2 Q}{\partial \beta^2} &=& 2 \sum_{i=1}^n x_i^2 >= 0 \\
+    \frac{\partial^2 Q}{\partial \alpha \partial \beta} &=& 0
+  \end{eqnarray}
+  ヘッセ行列は,
+  \begin{equation}
+    H = 
+    \left[
+      \begin{array}{cc}
+        \partial^2 Q / \partial \alpha^2 & \partial^2 Q/\partial \alpha \partial \beta \\
+        \partial^2 Q/\partial \alpha \partial \beta & \partial^2 Q / \partial \beta^2
+      \end{array}
+    \right]
+    = \left[
+      \begin{array}{cc}
+        2n & 0 \\
+        0 & 2 \sum x_i^2
+      \end{array}
+    \right]
+  \end{equation}
+  いま, 任意の2次元ベクトル $\bm{t} = (t_1, t_2)'$ に対して二次形式,
+  \begin{equation}
+    \bm{t}'H\bm{t} = (t_1, t_2) \left(
+      \begin{array}{cc}
+        2n & 0 \\
+        0 & 2 \sum x_i^2
+      \end{array}
+    \right) \left( 
+      \begin{array}{c}
+        t_1 \\
+        t_2
+      \end{array}
+    \right) = 2(nt_1^2 + t_2^2 \sum x_i^2) \geq 0
+  \end{equation}
+  となり, これが $0$ となるのは, $\bm{t}=\bm{0}$ のときのみ. よってヘッセ行列 $H$ は正定値. つまり, 式(\ref{Normal-equation-2-value}) を満たす,
+  $\alpha, \beta$ が極小値であることが分かる.
   \appendix
   \section{}
   \subsection{2変数関数の極値}
   偏差平方和を最小にするような, $\alpha$ と $\beta$ を求める際に,$\alpha, \beta$ に関する偏微分を $0$ として,推定量を求めた.しかし,偏微分が $0$ と置くだけでは,
-  $Q(\alpha, \beta)$ の極値が求められるだけで,最小値かどうかは分からない.テキストだと当たり前のように書かれている(きっと頭の良い人にとっては自明なのだろうが)が私には分からないので
-  2変数関数の極値から考え直していく.
+  $Q(\alpha, \beta)$ の極値が求められるだけで,最小値かどうかは分からない.テキストだと当たり前のように書かれているけど.
 
   \subsubsection{極大・極小}
   関数 $f(x, y)$ は連続かつ微分可能とする.
@@ -134,7 +172,7 @@
     行列
     \begin{equation*}
       \left[
-        \begin{array}{ccc}
+        \begin{array}{cc}
           f_{xx} & f_{xy} \\
           f_{xy} & f_{yy}
         \end{array}
@@ -151,7 +189,10 @@
       \item[不定値] $(x_0, y_0)$ は極値点ではない
     \end{description}
   \end{theo}
-  \footnotetext{高校数学の美しい物語：\url{https://mathtrain.jp/hessian}}
+  \footnotetext{高校数学の美しい物語とか参考になる：\url{https://mathtrain.jp/hessian}}
+
+  \subsubsection{正定置・負定値・不定値}
+
 
   \begin{thebibliography}{9}
     \bibitem{finance-stats} Tze Leung Lai, Haipeng Xing 著, 松原 望, 山村吉信 訳: 『ファイナンスのための統計学 -統計的アプローチによる評価と意思決定-』, 東京図書, 2016
