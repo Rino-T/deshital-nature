@@ -11,9 +11,6 @@ $ platex filename.tex
 $ dvipdfmx finlename.dvi
 ```
 
-## MacTex
+## Latex 参考 URL
 
-大学時代は platex を使っていたが、mactex なるものを見つけたので、そちらを利用してみることにした。
-
-- [MacTex](https://texwiki.texjp.org/?MacTeX#t244993f)
-- [参考(Qiita)](https://qiita.com/Mizuto_Kadowaki/items/f8878140125ad40ac56e)
+- [TeX/LaTeX の数式アルファベットの太字コマンドまとめ](https://tm23forest.com/contents/tex-latex-math-bold-etc-family) 空間用の記号の書体を探すときに使える.

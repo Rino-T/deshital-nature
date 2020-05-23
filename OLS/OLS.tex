@@ -112,7 +112,7 @@
         t_1 \\
         t_2
       \end{array}
-    \right) = 2(nt_1^2 + t_2^2 \sum x_i^2) \geq 0
+    \right) = 2\left(nt_1^2 + t_2^2 \sum x_i^2 \right) \geq 0
   \end{equation}
   となり, これが $0$ となるのは, $\bm{t}=\bm{0}$ のときのみ. よってヘッセ行列 $H$ は正定値. つまり, 式(\ref{Normal-equation-2-value}) を満たす,
   $\alpha, \beta$ が極小値であることが分かる.
@@ -191,8 +191,19 @@
   \end{theo}
   \footnotetext{高校数学の美しい物語とか参考になる：\url{https://mathtrain.jp/hessian}}
 
-  \subsubsection{正定置・負定値・不定値}
-
+  \subsubsection{正定値・負定値・不定値}
+  $\bm{x}'\bm{A}\bm{x}$ を任意の二次形式とする. ただし, $\bm{x} = (x_1, \ldots, x_n)'$.
+  
+  \begin{description}
+    \item[非負定値(nonnegative definite)] $\mathcal{R}^n$\footnotemark のあらゆる $\bm{x}$ に対して $\bm{x}'\bm{A}\bm{x} \geq 0$ であるとき. $\bm{x}$ の少なくとも1つの値, 具体的には $\bm{x} = \bm{0}$ に対して, $\bm{x}'\bm{A}\bm{x} = 0$ であることに注意.
+    \item[正定値(positive definite)] $\bm{x}'\bm{A}\bm{x}$ が非負定値かつ, 零ベクトル $\bm{0}$ に対してのみ $\bm{x}'\bm{A}\bm{x} = 0$ となる時. すなわち, $\bm{x} = \bm{0}$ を除く, あらゆる $\bm{x}$ に対して $\bm{x}'\bm{A}\bm{x} > 0$ のとき.
+    \item[半正定値(positive semidefinite)] 非負定値であるが, 正定値でない二次形式. あらゆる $\bm{x} \in \mathcal{R}^n$ に対して, $\bm{x}'\bm{A}\bm{x} \geq 0$で, ある $\bm{x} \neq \bm{0}$ に対して $\bm{x}'\bm{A}\bm{x} = 0$ のとき.
+    \item[非正定値, 負定値, 半負定値]  それぞれ, $-\bm{x}'\bm{A}\bm{x}$ が, 非負定値, 正定値, 半正定値のとき.
+    \item[不定値(indefinite)] 非負定値でも, 非正定値でもない二次形式.
+  \end{description}
+  \footnotetext{
+    記号 $\mathcal{R}^{m \times n}$ はその要素が全ての $m \times n$ 行列からなる線形空間を表す. 記号 $\mathcal{R}^n$ は全ての $n$ 次元ベクトルの集合.
+  }
 
   \begin{thebibliography}{9}
     \bibitem{finance-stats} Tze Leung Lai, Haipeng Xing 著, 松原 望, 山村吉信 訳: 『ファイナンスのための統計学 -統計的アプローチによる評価と意思決定-』, 東京図書, 2016
