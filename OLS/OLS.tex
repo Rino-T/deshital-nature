@@ -115,7 +115,43 @@
     \right) = 2\left(nt_1^2 + t_2^2 \sum x_i^2 \right) \geq 0
   \end{equation}
   となり, これが $0$ となるのは, $\bm{t}=\bm{0}$ のときのみ. よってヘッセ行列 $H$ は正定値. つまり, 式(\ref{Normal-equation-2-value}) を満たす,
-  $\alpha, \beta$ が極小値であることが分かる.
+  $\alpha, \beta$ が極小値であることが分かる. また, 図 \ref{fig:Quadratic-function-of-bivariate-function} の形から, 極小かつ最小であることも分かる.
+
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.5]{img/Quadratic-function-of-bivariate-function.png}
+    \caption{2変数関数の二次関数のイメージ}
+    \label{fig:Quadratic-function-of-bivariate-function}
+  \end{figure}
+
+  式(\ref{Normal-equation-2-value}) を解いていく.
+
+  \begin{eqnarray}
+    &&
+    \begin{cases}
+      \frac{\partial Q}{\partial \alpha} = -2 \sum (y_i - \alpha - \beta x_i) = -2 \left\{ \sum y_i - n\alpha - \beta \sum x_i \right\} = 0 \\
+      \frac{\partial Q}{\partial \beta} = -2\sum_{i=1}^n x_i (y_i - \alpha - \beta x_i) = -2 \left\{ \sum x_i y_i  - \alpha \sum x_i - \beta \sum x_i^2 \right\} = 0
+    \end{cases} \\
+    &\Leftrightarrow&
+    \begin{cases}
+      \alpha n + \beta \sum x_i = \sum y_i \\
+      \alpha \sum x_i + \beta \sum x_i^2 = \sum x_i y_i
+    \end{cases}
+  \end{eqnarray}
+
+  よって,
+
+  \begin{equation}
+    \hat{\alpha} = \frac{1}{n} \sum y_i - \hat{\beta} \frac{1}{n} \sum x_i = \bar{y} - \hat{\beta}
+  \end{equation}
+
+  \begin{eqnarray*}
+    \hat{\alpha} \sum x_i + \beta \sum x_i^2 &=& \sum x_i y_i
+    (\bar{y} - \beta \bar{x}) \bar{x} \sum x_i^2 &=& \frac{1}{n} x_i y_i
+    \bar{y} \bar{x} - \beta 
+  \end{eqnarray*}
+
+
   \appendix
   \section{}
   \subsection{2変数関数の極値}
@@ -202,7 +238,7 @@
     \item[不定値(indefinite)] 非負定値でも, 非正定値でもない二次形式.
   \end{description}
   \footnotetext{
-    記号 $\mathcal{R}^{m \times n}$ はその要素が全ての $m \times n$ 行列からなる線形空間を表す. 記号 $\mathcal{R}^n$ は全ての $n$ 次元ベクトルの集合.
+    記号 $\mathcal{R}^{m \times n}$ はその要素が全ての $m \times n$ 行列からなる線形空間を表す. 記号 $\mathcal{R}^n$ は全ての $n$ 列次元ベクトルの集合.
   }
 
   \begin{thebibliography}{9}
